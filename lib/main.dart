@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'core/di/di_setup.dart';
+import 'presentation/home/stock_home_screen.dart';
 import 'theme/theme.dart';
 
 void main() {
+  diSetup(useMockData: false);
   runApp(const EdencrewAssignmentApp());
 }
 
@@ -14,7 +17,7 @@ class EdencrewAssignmentApp extends StatelessWidget {
     return MaterialApp(
       title: '이든크루 평가 과제',
       theme: AppTheme.dark,
-      home: const StartHereScreen(),
+      home: const StockHomeScreen(),
     );
   }
 }
