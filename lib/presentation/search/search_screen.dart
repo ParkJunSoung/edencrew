@@ -44,18 +44,23 @@ class _SearchRootState extends State<SearchRoot> {
 
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: _viewModel,
-      builder: (BuildContext context, Widget? child) => SearchScreen(
-        state: _viewModel.state,
-        onAction: (SearchAction action) => _onAction(context, action),
-        autofocus: widget.isActive,
-        onTapWatchlist: widget.onTapWatchlist,
-        onTapStock: (StockSearchResult stock) => widget.onTapStock(
-          StockMetadata(
-            symbol: stock.symbol,
-            name: stock.name,
-            exchangeName: stock.exchangeName,
+    return ScaffoldMessenger(
+      child: Builder(
+        builder: (BuildContext messengerContext) => ListenableBuilder(
+          listenable: _viewModel,
+          builder: (BuildContext context, Widget? child) => SearchScreen(
+            state: _viewModel.state,
+            onAction: (SearchAction action) =>
+                _onAction(messengerContext, action),
+            autofocus: widget.isActive,
+            onTapWatchlist: widget.onTapWatchlist,
+            onTapStock: (StockSearchResult stock) => widget.onTapStock(
+              StockMetadata(
+                symbol: stock.symbol,
+                name: stock.name,
+                exchangeName: stock.exchangeName,
+              ),
+            ),
           ),
         ),
       ),

@@ -38,12 +38,17 @@ class _StockDetailRootState extends State<StockDetailRoot> {
 
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: _viewModel,
-      builder: (BuildContext context, Widget? child) => StockDetailScreen(
-        state: _viewModel.state,
-        onAction: (StockDetailAction action) => _onAction(context, action),
-        onBack: () => Navigator.of(context).pop(),
+    return ScaffoldMessenger(
+      child: Builder(
+        builder: (BuildContext messengerContext) => ListenableBuilder(
+          listenable: _viewModel,
+          builder: (BuildContext context, Widget? child) => StockDetailScreen(
+            state: _viewModel.state,
+            onAction: (StockDetailAction action) =>
+                _onAction(messengerContext, action),
+            onBack: () => Navigator.of(context).pop(),
+          ),
+        ),
       ),
     );
   }
